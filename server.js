@@ -14,12 +14,16 @@ const app = express();
 // Middleware
 app.use(helmet());
 app.use(morgan('combined'));
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://expense-tracker-frontend-hazel-xi.vercel.app'
+];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? 'https://your-frontend-domain.com' 
-    : 'http://localhost:3000',
+  origin: allowedOrigins,
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
